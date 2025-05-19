@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContactSphere | Targeted Contact Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #2c2c2c;
+            --primary-purple: #4d0969;
+            --neon-purple: #a855f7;
+            --neon-green: #10b981;
+            --glow-effect: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Neon border animation */
+        @keyframes neon-border {
+            0%, 100% {
+                box-shadow: 0 0 5px var(--neon-purple), inset 0 0 5px var(--neon-purple);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--neon-purple), inset 0 0 10px var(--neon-purple);
+            }
+        }
+
+        /* Button hover effect */
+        .btn-neon {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-neon:hover {
+            box-shadow: var(--glow-effect);
+            transform: translateY(-2px);
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(168, 85, 247, 0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .btn-neon:hover::before {
+            left: 100%;
+            top: 100%;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Grid pattern background */
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(77, 9, 105, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 9, 105, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Feature card hover effect */
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
+            border-color: var(--neon-purple);
+        }
+
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-purple);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-purple);
+        }
+
+        /* Glowing text */
+        .glow-text {
+            text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
+        }
+
+        /* Animated gradient border */
+        .gradient-border {
+            position: relative;
+            border-radius: 0.5rem;
+        }
+
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-green), var(--neon-purple));
+            background-size: 200% 200%;
+            border-radius: 0.5rem;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body class="grid-pattern">
+    <!-- Navigation -->
+    <nav class="bg-gray-900 bg-opacity-80 backdrop-blur-md fixed w-full z-50 border-b border-purple-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <i class="fas fa-atom text-2xl mr-2 text-purple-500"></i>
+                            <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">ContactSphere</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#features" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-purple-900 hover:bg-opacity-50">Features</a>
+                        <a href="#how-it-works" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-purple-900 hover:bg-opacity-50">How It Works</a>
+                        <a href="#pricing" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-purple-900 hover:bg-opacity-50">Pricing</a>
+                        <a href="#testimonials" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-purple-900 hover:bg-opacity-50">Testimonials</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <button class="btn-neon ml-4 px-6 py-2 rounded-md text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900">
+                        Get Started
+                    </button>
+                </div>
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">How It Works</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+                <a href="#testimonials" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Testimonials</a>
+                <button class="btn-neon w-full mt-2 px-6 py-2 rounded-md text-base font-medium text-white bg-gradient-to-r from-purple-600 to-purple-800">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                    <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                        <span class="block">Precision Contact Data</span>
+                        <span class="block bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">For Your Target Market</span>
+                    </h1>
+                    <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                        Access verified contact information for decision-makers in your industry. Our AI-powered platform delivers accurate, up-to-date data to fuel your sales pipeline.
+                    </p>
+                    <div class="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                            <button class="btn-neon px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 md:py-4 md:text-lg md:px-10">
+                                Start Free Trial
+                            </button>
+                            <button class="px-8 py-4 border border-transparent text-base font-medium rounded-md text-purple-300 bg-gray-800 hover:bg-gray-700 md:py-4 md:text-lg md:px-10">
+                                See How It Works
+                            </button>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-400">
+                            Get 50 free contacts when you sign up today.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                    <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md gradient-border">
+                        <div class="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-gray-900 opacity-70"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative w-64 h-64 rounded-full bg-purple-900 opacity-20 animate-pulse"></div>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative w-48 h-48 rounded-full bg-green-900 opacity-20 animate-pulse delay-300"></div>
+                            </div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative w-32 h-32 rounded-full bg-purple-700 opacity-20 animate-pulse delay-700"></div>
+                            </div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                                <div class="mb-6 floating">
+                                    <i class="fas fa-network-wired text-6xl text-purple-400 glow-text"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-2">Connect with Decision Makers</h3>
+                                <p class="text-purple-200">Our database covers 10M+ companies worldwide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden">
+            <svg class="w-full h-16" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#4d0969"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#4d0969"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#4d0969"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-900 bg-opacity-70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-purple-400 font-semibold tracking-wide uppercase">Features</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                    Powerful Tools to Grow Your Business
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto">
+                    Everything you need to find and connect with your ideal customers.
+                </p>
+            </div>
+
+            <div class="mt-20">
+                <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Feature 1 -->
+                    <div class="feature-card pt-10 pb-12 px-8 bg-gray-800 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-green-500"></div>
+                        <div class="relative">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-900 text-white mb-6">
+                                <i class="fas fa-bullseye text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-white mb-3">Precision Targeting</h3>
+                            <p class="text-gray-300">
+                                Filter contacts by industry, job title, company size, and more to reach exactly who you need.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-green-500 opacity-20"></div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card pt-10 pb-12 px-8 bg-gray-800 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-purple-500"></div>
+                        <div class="relative">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-900 text-white mb-6">
+                                <i class="fas fa-check-double text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-white mb-3">Verified Data</h3>
+                            <p class="text-gray-300">
+                                Our proprietary verification system ensures 95%+ accuracy on all contact information.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-purple-500 opacity-20"></div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card pt-10 pb-12 px-8 bg-gray-800 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-green-500"></div>
+                        <div class="relative">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-900 text-white mb-6">
+                                <i class="fas fa-sync-alt text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-white mb-3">Real-time Updates</h3>
+                            <p class="text-gray-300">
+                                Our database updates daily so you always have the most current information.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-green-500 opacity-20"></div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card pt-10 pb-12 px-8 bg-gray-800 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-purple-500"></div>
+                        <div class="relative">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-900 text-white mb-6">
+                                <i class="fas fa-plug text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-white mb-3">CRM Integrations</h3>
+                            <p class="text-gray-300">
+                                Seamlessly connect with Salesforce, HubSpot, and other popular CRM platforms.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-purple-500 opacity-20"></div>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="feature-card pt-10 pb-12 px-8 bg-gray-800 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-green-500"></div>
+                        <div class="relative">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-900 text-white mb-6">
+                                <i class="fas fa-chart-line text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-white mb-3">Advanced Analytics</h3>
+                            <p class="text-gray-300">
+                                Track campaign performance and optimize your outreach with detailed metrics.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-green-500 opacity-20"></div>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="feature-card pt-10 pb-12 px-8 bg-gray-800 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-purple-500"></div>
+                        <div class="relative">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-900 text-white mb-6">
+                                <i class="fas fa-shield-alt text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-white mb-3">GDPR Compliant</h3>
+                            <p class="text-gray-300">
+                                Fully compliant with all data protection regulations to keep your business safe.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-purple-500 opacity-20"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900 to-purple-900 opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="lg:text-center mb-16">
+                <h2 class="text-base text-purple-400 font-semibold tracking-wide uppercase">Process</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                    How ContactSphere Works
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto">
+                    Get started in minutes and see results immediately.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+                    <!-- Step 1 -->
+                    <div class="relative pb-12 lg:pb-0">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-900 text-white border-2 border-purple-400">
+                                <span class="text-xl font-bold">1</span>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-white">Define Your Target</h3>
+                            </div>
+                        </div>
+                        <div class="mt-6 ml-16">
+                            <p class="text-base text-gray-300">
+                                Use our intuitive filters to specify exactly who you want to reach - by industry, job title, location, company size, and more.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-16 h-full w-0.5 bg-purple-900 lg:h-0.5 lg:w-full lg:left-0 lg:top-24"></div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative pb-12 lg:pb-0">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-900 text-white border-2 border-purple-400">
+                                <span class="text-xl font-bold">2</span>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-white">Generate Contacts</h3>
+                            </div>
+                        </div>
+                        <div class="mt-6 ml-16">
+                            <p class="text-base text-gray-300">
+                                Our AI instantly searches our database of 50M+ contacts to find matches that meet your criteria.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-16 h-full w-0.5 bg-purple-900 lg:h-0.5 lg:w-full lg:left-0 lg:top-24"></div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative">
+                        <div class="flex items-center">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-purple-900 text-white border-2 border-purple-400">
+                                <span class="text-xl font-bold">3</span>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-white">Connect & Convert</h3>
+                            </div>
+                        </div>
+                        <div class="mt-6 ml-16">
+                            <p class="text-base text-gray-300">
+                                Export contacts to your CRM or use our built-in tools to launch email and calling campaigns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-20">
+                    <div class="relative rounded-xl overflow-hidden bg-gray-800 p-8 md:p-12">
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-900 to-green-900 opacity-20"></div>
+                        <div class="relative">
+                            <div class="sm:flex sm:items-center sm:justify-between">
+                                <div class="sm:w-0 sm:flex-1">
+                                    <h3 class="text-2xl font-bold text-white">
+                                        Ready to transform your outreach?
+                                    </h3>
+                                    <p class="mt-3 text-lg text-gray-300">
+                                        Sign up now and get 50 free contacts to test our platform.
+                                    </p>
+                                </div>
+                                <div class="mt-8 sm:mt-0 sm:ml-8">
+                                    <button class="btn-neon pulse px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-green-600 hover:from-purple-700 hover:to-green-700 md:py-4 md:text-lg md:px-10">
+                                        Get Started Free
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-gray-900 bg-opacity-70">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-purple-400 font-semibold tracking-wide uppercase">Pricing</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                    Simple, transparent pricing
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto">
+                    Pay only for what you need with flexible plans that scale with your business.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-3">
+                <!-- Starter Plan -->
+                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700 hover:border-purple-500 transition-all duration-300">
+                    <div class="px-6 py-8">
+                        <h3 class="text-2xl font-bold text-white">Starter</h3>
+                        <p class="mt-4 text-gray-300">Perfect for small teams and individual professionals</p>
+                        <div class="mt-8">
+                            <p class="text-4xl font-extrabold text-white">$99</p>
+                            <p class="mt-2 text-gray-300">per month</p>
+                        </div>
+                        <button class="mt-8 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-900 bg-gray-200 hover:bg-white">
+                            Get Started
+                        </button>
+                    </div>
+                    <div class="px-6 pt-6 pb-8 bg-gray-700 bg-opacity-50">
+                        <h4 class="text-sm font-medium text-white tracking-wide uppercase">Includes</h4>
+                        <ul class="mt-6 space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">500 contacts per month</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Basic search filters</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">CSV exports</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Email support</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Professional Plan (Featured) -->
+                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border-2 border-purple-500 transform scale-105 z-10 relative">
+                    <div class="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 transform translate-x-2 -translate-y-2">
+                        POPULAR
+                    </div>
+                    <div class="px-6 py-8">
+                        <h3 class="text-2xl font-bold text-white">Professional</h3>
+                        <p class="mt-4 text-gray-300">Ideal for growing sales teams and agencies</p>
+                        <div class="mt-8">
+                            <p class="text-4xl font-extrabold text-white">$299</p>
+                            <p class="mt-2 text-gray-300">per month</p>
+                        </div>
+                        <button class="mt-8 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900">
+                            Get Started
+                        </button>
+                    </div>
+                    <div class="px-6 pt-6 pb-8 bg-gray-700 bg-opacity-50">
+                        <h4 class="text-sm font-medium text-white tracking-wide uppercase">Includes</h4>
+                        <ul class="mt-6 space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">2,000 contacts per month</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Advanced search filters</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">CRM integrations</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Priority support</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Basic analytics</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-300">
+                    <div class="px-6 py-8">
+                        <h3 class="text-2xl font-bold text-white">Enterprise</h3>
+                        <p class="mt-4 text-gray-300">For large organizations with custom needs</p>
+                        <div class="mt-8">
+                            <p class="text-4xl font-extrabold text-white">Custom</p>
+                            <p class="mt-2 text-gray-300">volume pricing</p>
+                        </div>
+                        <button class="mt-8 w-full px-6 py-3 border border-transparent text-base font-medium rounded-md text-green-900 bg-gray-200 hover:bg-white">
+                            Contact Sales
+                        </button>
+                    </div>
+                    <div class="px-6 pt-6 pb-8 bg-gray-700 bg-opacity-50">
+                        <h4 class="text-sm font-medium text-white tracking-wide uppercase">Includes</h4>
+                        <ul class="mt-6 space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">10,000+ contacts/month</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">All advanced features</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Dedicated account manager</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">API access</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Advanced analytics</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle text-green-400"></i>
+                                </div>
+                                <p class="ml-3 text-base text-gray-300">Custom integrations</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-gray-900 opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="lg:text-center">
+                <h2 class="text-base text-purple-400 font-semibold tracking-wide uppercase">Testimonials</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                    Trusted by sales teams worldwide
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto">
+                    Don't just take our word for it - hear what our customers have to say.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700 hover:border-purple-500 transition-all duration-300">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah K.">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-white">Sarah K.</h4>
+                            <p class="text-purple-300">Director of Sales, TechCorp</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-gray-300 italic">
+                            "ContactSphere has transformed our outbound sales process. We're seeing 3x more meetings booked since we started using their data. The accuracy is unmatched."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700 hover:border-green-500 transition-all duration-300">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T.">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-white">Michael T.</h4>
+                            <p class="text-green-300">CEO, GrowthHack</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-gray-300 italic">
+                            "The targeting capabilities are incredible. We can now reach exactly the right people at exactly the right companies. Our conversion rates have never been higher."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700 hover:border-purple-500 transition-all duration-300">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jessica L.">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-white">Jessica L.</h4>
+                            <p class="text-purple-300">Marketing Director, SaaSCo</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-gray-300 italic">
+                            "We tried several contact data providers before finding ContactSphere. The difference in data quality is night and day. Worth every penny."
+                        </p>
+                    </div>
+                    <div class="mt-6 flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-purple-900 to-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                    <h2 class="text-3xl tracking-tight font-extrabold text-white sm:text-4xl">
+                        Ready to boost your sales pipeline?
+                    </h2>
+                    <p class="mt-3 text-lg text-gray-300 sm:mt-5">
+                        Join thousands of businesses already using ContactSphere to find and connect with their ideal customers.
+                    </p>
+                </div>
+                <div class="mt-12 sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                    <div class="w-full">
+                        <div class="relative">
+                            <div class="relative rounded-md shadow-sm">
+                                <input type="email" class="block w-full px-5 py-3 text-base text-gray-900 placeholder-gray-500 rounded-md border-0 focus:ring-2 focus:ring-purple-500" placeholder="Enter your email">
+                            </div>
+                            <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+                                <button class="btn-neon w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-green-600 hover:from-purple-700 hover:to-green-700">
+                                    Start Free Trial
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-300">
+                            Get 50 free contacts when you sign up. No credit card required.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                <div class="space-y-8 xl:col-span-1">
+                    <div class="flex items-center">
+                        <i class="fas fa-atom text-2xl mr-2 text-purple-500"></i>
+                        <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">ContactSphere</span>
+                    </div>
+                    <p class="text-gray-300 text-base">
+                        The most accurate contact data platform for B2B sales and marketing teams.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-purple-400">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-purple-400">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Product
+                            </h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Features
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Pricing
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        API
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Integrations
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Company
+                            </h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        About
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Blog
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Careers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Resources
+                            </h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Documentation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Guides
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Webinars
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Community
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
+                                Legal
+                            </h3>
+                            <ul class="mt-4 space-y-4">
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Privacy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        Terms
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        GDPR
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-base text-gray-300 hover:text-white">
+                                        CCPA
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8">
+                <p class="text-base text-gray-400 text-center">
+                    &copy; 2023 ContactSphere. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation to elements
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.feature-card, .floating');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+
+        // Run once on page load
+        animateOnScroll();
+        
+        // Then run on scroll
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

@@ -19,10 +19,10 @@ app.get('/', (req, res) => {
     //console.log('Request received for /'); // Debug log
     let count;
 
-    //console.log('Reading count from:', path.join(__dirname, 'count.txt'));
+    //console.log('Reading count from:', path.join(__dirname, 'dataBased.txt'));
 
     try {
-        count = readFileSync(path.join(__dirname, 'count.txt'), 'utf8').trim();
+        count = readFileSync(path.join(__dirname, 'dataBased.txt'), 'utf8').trim();
     } catch (err) {
         console.error('Error reading count file:', err);
         count = '0'; // Fallback to 0 if the file can't be read
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
     // Write the new count back to the file
     try {
-        writeFileSync(path.join(__dirname, 'count.txt'), newCount.toString());
+        writeFileSync(path.join(__dirname, 'dataBased.txt'), newCount.toString());
     } catch (err) {
         console.error('Error writing to count file:', err);
     }

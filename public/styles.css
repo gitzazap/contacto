@@ -43,6 +43,9 @@ body {
   font-weight: 500;
   cursor: pointer;
 }
+.purp{
+  padding: 5px 10px;
+}
 .btn-neon {
   position: relative;
   overflow: hidden;
@@ -385,7 +388,7 @@ body {
 .footer-container p { color: #9ca3af; }
 
 
-p{
+/*p{
     font-family: "Quicksand", sans-serif;
     animation: grow 5s linear infinite;
 }
@@ -402,7 +405,7 @@ p{
     height: 50px;
     border-radius: 10px;
 }
-/*@keyframes grow{
+@keyframes grow{
     0%{
         color: black
     }
