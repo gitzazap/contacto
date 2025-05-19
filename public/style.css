@@ -1,0 +1,38 @@
+p{
+    font-family: "Quicksand", sans-serif;
+    animation: grow 5s linear infinite;
+}
+#box{
+    background-color: rgb(199, 199, 199);
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    display: flex;
+}
+.mini-box{
+  background-color: rgb(116, 116, 116);
+  width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+@keyframes grow{
+    0%{
+        color: black
+    }
+    25%{
+        color: red;
+        font-size: 50px;
+    }
+    50%{
+        color: green;
+        font-size: 16px;
+    }
+    50%{
+        color: blue;
+        font-size: 50px;
+    }
+    100%{
+        color: black;
+        font-size: 16px;
+    }
+}

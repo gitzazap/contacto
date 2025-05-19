@@ -1,9 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <title>contacto</title>
-    </head>
-    <body></body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ContactSphere | Targeted Contact Data</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-p7CmGSnY6NfMx0txzR7qjZt+YuG0A4RfiA28Rjr3zwcXb7WLmKdzsTyy6kCx1Vp6R+0GPNO5M2yXwFZ+75Y4Xg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="grid-pattern">
+
+
+
+
+        
+
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fas fa-atom"></i>
+        <span class="logo-text">ContactSphere</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-neon">Get Started</button>
+      </div>
+      <button id="mobile-menu-button" class="mobile-menu-button">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="mobile-menu hidden">
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#how-it-works" class="mobile-link">How It Works</a>
+      <a href="#pricing" class="mobile-link">Pricing</a>
+      <a href="#testimonials" class="mobile-link">Testimonials</a>
+      <button class="btn btn-neon w-full">Get Started</button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Precision Contact Data<br>
+          <span class="gradient-text">For Your Target Market</span>
+        </h1>
+        <p class="hero-subtitle">
+          Access verified contact information for decision-makers in your industry. Our AI-powered platform delivers accurate, up-to-date data to fuel your sales pipeline.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-neon lg">Start Free Trial</button>
+          <button class="btn btn-secondary lg">See How It Works</button>
+        </div>
+        <p class="hero-note">Get 50 free contacts when you sign up today.</p>
+      </div>
+      <div class="hero-image">
+        <div class="image-card gradient-border">
+          <div class="image-bg">
+            <div class="pulse-layer layer1"></div>
+            <div class="pulse-layer layer2"></div>
+            <div class="pulse-layer layer3"></div>
+          </div>
+          <div class="image-content">
+            <div class="floating">
+              <i class="fas fa-network-wired neon-icon"></i>
+            </div>
+            <h3>Connect with Decision Makers</h3>
+            <p>Our database covers 10M+ companies worldwide</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="svg-divider">
+      <!-- your SVG waves here -->
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="features-section">
+
+        <p id="view-count"></p>
+        <div id="box">
+          <div>
+         <div class="mini-box"></div>
+         <div class="mini-box"></div>
+         </div>
+         <div class="mini-box"></div>
+         <div class="mini-box"></div>
+        </div>
+
+
+
+
+    <div class="container">
+      <div class="section-header">
+        <h2 class="overline">Features</h2>
+        <p class="section-title">Powerful Tools to Grow Your Business</p>
+        <p class="section-desc">Everything you need to find and connect with your ideal customers.</p>
+      </div>
+      <div class="features-grid">
+        <!-- Repeat this block for each feature -->
+        <div class="feature-card">
+          <div class="feature-line top gradient1"></div>
+          <div class="feature-icon bg-purple">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Precision Targeting</h3>
+          <p>Filter contacts by industry, job title, company size, and more to reach exactly who you need.</p>
+          <div class="feature-line bottom gradient1"></div>
+        </div>
+        <!-- … other 5 cards with gradient2/gradient1 etc. … -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS SECTION -->
+  <section id="how-it-works" class="process-section">
+    <div class="process-overlay"></div>
+    <div class="container">
+      <div class="section-header">
+        <h2 class="overline">Process</h2>
+        <p class="section-title">How ContactSphere Works</p>
+        <p class="section-desc">Get started in minutes and see results immediately.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-icon">1</div>
+          <h3>Define Your Target</h3>
+          <p>Use our intuitive filters to specify exactly who you want to reach.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">2</div>
+          <h3>Generate Contacts</h3>
+          <p>Our AI instantly searches our database of 50M+ contacts to find matches.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">3</div>
+          <h3>Connect & Convert</h3>
+          <p>Export contacts to your CRM or launch email and calling campaigns.</p>
+        </div>
+      </div>
+      <div class="cta-card">
+        <h3>Ready to transform your outreach?</h3>
+        <p>Sign up now and get 50 free contacts to test our platform.</p>
+        <button class="btn btn-neon pulse lg">Get Started Free</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing" class="pricing-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="overline">Pricing</h2>
+        <p class="section-title">Simple, transparent pricing</p>
+        <p class="section-desc">Pay only for what you need with flexible plans that scale.</p>
+      </div>
+      <div class="pricing-grid">
+        <!-- Starter Plan -->
+        <div class="plan-card">
+          <h3>Starter</h3>
+          <p>Perfect for small teams</p>
+          <p class="price">$99<span>/mo</span></p>
+          <button class="btn btn-outline">Get Started</button>
+          <ul class="plan-features">
+            <li><i class="fas fa-check-circle"></i>500 contacts</li>
+            <li><i class="fas fa-check-circle"></i>Basic filters</li>
+            <li><i class="fas fa-check-circle"></i>CSV exports</li>
+            <li><i class="fas fa-check-circle"></i>Email support</li>
+          </ul>
+        </div>
+        <!-- Professional (Featured) -->
+        <div class="plan-card featured">
+          <div class="ribbon">POPULAR</div>
+          <h3>Professional</h3>
+          <p>Ideal for growing teams</p>
+          <p class="price">$299<span>/mo</span></p>
+          <button class="btn btn-neon">Get Started</button>
+          <ul class="plan-features">
+            <li><i class="fas fa-check-circle"></i>2,000 contacts</li>
+            <li><i class="fas fa-check-circle"></i>Advanced filters</li>
+            <li><i class="fas fa-check-circle"></i>CRM integrations</li>
+            <li><i class="fas fa-check-circle"></i>Priority support</li>
+            <li><i class="fas fa-check-circle"></i>Basic analytics</li>
+          </ul>
+        </div>
+        <!-- Enterprise -->
+        <div class="plan-card">
+          <h3>Enterprise</h3>
+          <p>Custom volume pricing</p>
+          <p class="price">Contact Sales</p>
+          <button class="btn btn-outline">Contact Sales</button>
+          <ul class="plan-features">
+            <li><i class="fas fa-check-circle"></i>10,000+ contacts</li>
+            <li><i class="fas fa-check-circle"></i>All features</li>
+            <li><i class="fas fa-check-circle"></i>Dedicated manager</li>
+            <li><i class="fas fa-check-circle"></i>API access</li>
+            <li><i class="fas fa-check-circle"></i>Custom integrations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials" class="testimonials-section">
+    <div class="testimonials-overlay"></div>
+    <div class="container">
+      <div class="section-header">
+        <h2 class="overline">Testimonials</h2>
+        <p class="section-title">Trusted by sales teams worldwide</p>
+        <p class="section-desc">Don't just take our word for it—hear from our customers.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah K.">
+          <h4>Sarah K.</h4>
+          <p class="role">Director of Sales, TechCorp</p>
+          <p class="quote">“ContactSphere has transformed our outbound process. 3x more meetings booked.”</p>
+          <p class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></p>
+        </div>
+        <!-- … Michael T. & Jessica L. … -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="final-cta-section">
+    <div class="container cta-container">
+      <div class="cta-text">
+        <h2>Ready to boost your sales pipeline?</h2>
+        <p>Join thousands already using ContactSphere.</p>
+      </div>
+      <div class="cta-form">
+        <input type="email" placeholder="Enter your email" class="cta-input">
+        <button class="btn btn-neon">
+          Start Free Trial <i class="fas fa-arrow-right"></i>
+        </button>
+        <p class="cta-note">Get 50 free contacts. No credit card required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <i class="fas fa-atom"></i>
+        <span>ContactSphere</span>
+      </div>
+      <p>The most accurate contact data platform for B2B sales teams.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h5>Product</h5>
+          <a href="#">Features</a>
+          <a href="#">Pricing</a>
+          <a href="#">API</a>
+          <a href="#">Integrations</a>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+        </div>
+        <div>
+          <h5>Resources</h5>
+          <a href="#">Docs</a>
+          <a href="#">Guides</a>
+          <a href="#">Webinars</a>
+          <a href="#">Community</a>
+        </div>
+        <div>
+          <h5>Legal</h5>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">GDPR</a>
+          <a href="#">CCPA</a>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2023 ContactSphere. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('view-count').innerHTML='This page has been viewed 0 times!'</script>
+
+
+</body>
 </html>
